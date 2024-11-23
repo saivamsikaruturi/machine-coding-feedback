@@ -11,3 +11,4 @@ public class ParkingRate {
     // Getters and Setters
     // ...
 }
+

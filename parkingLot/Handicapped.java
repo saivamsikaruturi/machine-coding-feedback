@@ -6,3 +6,4 @@ public class Handicapped extends ParkingSpot {
         return true;
     }
 }
+

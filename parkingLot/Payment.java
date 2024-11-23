@@ -12,3 +12,4 @@ public abstract class Payment {
     // Getters and Setters
     // ...
 }
+

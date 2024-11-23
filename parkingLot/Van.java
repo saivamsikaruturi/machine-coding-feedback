@@ -5,3 +5,4 @@ public class Van extends Vehicle {
         // Logic to assign a ticket to the van
     }
 }
+

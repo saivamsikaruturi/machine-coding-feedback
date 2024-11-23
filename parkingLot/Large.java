@@ -6,3 +6,4 @@ public class Large extends ParkingSpot {
         return true;
     }
 }
+

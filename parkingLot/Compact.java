@@ -6,3 +6,4 @@ public class Compact extends ParkingSpot {
         return true;
     }
 }
+

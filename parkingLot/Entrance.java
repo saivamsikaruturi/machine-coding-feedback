@@ -11,3 +11,4 @@ public class Entrance {
     // Getters and Setters
     // ...
 }
+

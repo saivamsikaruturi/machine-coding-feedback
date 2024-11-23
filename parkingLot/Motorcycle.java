@@ -6,3 +6,4 @@ public class Motorcycle extends ParkingSpot {
         return true;
     }
 }
+

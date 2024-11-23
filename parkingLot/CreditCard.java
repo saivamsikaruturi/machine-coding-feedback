@@ -6,3 +6,4 @@ public class CreditCard extends Payment {
         return true;
     }
 }
+

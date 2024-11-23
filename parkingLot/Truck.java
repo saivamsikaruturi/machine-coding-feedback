@@ -5,3 +5,4 @@ public class Truck extends Vehicle {
         // Logic to assign a ticket to the truck
     }
 }
+

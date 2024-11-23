@@ -17,3 +17,4 @@ public class ParkingTicket {
     // Getters and Setters
     // ...
 }
+

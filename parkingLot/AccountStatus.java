@@ -7,3 +7,4 @@ enum AccountStatus {
     BLACKLISTED,
     NONE
 }
+
