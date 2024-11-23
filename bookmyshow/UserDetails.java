@@ -50,3 +50,4 @@ class UserDetails {
         this.userId = userId;
     }
 }
+
