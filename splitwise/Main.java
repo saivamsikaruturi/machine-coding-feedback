@@ -6,5 +6,4 @@ public class Main {
         SplitWise splitwise = new SplitWise();
         splitwise.demo();
     }
-
 }

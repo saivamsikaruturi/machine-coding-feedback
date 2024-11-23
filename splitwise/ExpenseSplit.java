@@ -7,3 +7,4 @@ public interface ExpenseSplit {
     public void validateSplitRequest(List<SplitDetails> splitList, double totalAmount);
 }
 
+

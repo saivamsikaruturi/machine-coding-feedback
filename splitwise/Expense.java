@@ -27,3 +27,4 @@ public class Expense {
         this.splitDetails.addAll(splitDetails);
     }
 }
+

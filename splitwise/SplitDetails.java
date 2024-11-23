@@ -27,5 +27,4 @@ public class SplitDetails {
         this.amountOwe = amountOwe;
     }
 
-
 }

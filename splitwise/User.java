@@ -17,5 +17,4 @@ public class User {
     public UserExpenseBalanceSheet getUserExpenseBalanceSheet() {
         return userExpenseBalanceSheet;
     }
-
 }

@@ -10,7 +10,5 @@ public class UnequalExpenseSplit implements ExpenseSplit{
 
         }
 
-
-
 }
 

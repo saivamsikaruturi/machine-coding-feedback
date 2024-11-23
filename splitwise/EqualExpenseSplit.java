@@ -16,3 +16,4 @@ public class EqualExpenseSplit implements ExpenseSplit{
         }
     }
 }
+

@@ -8,5 +8,4 @@ public class PercentageExpenseSplit implements ExpenseSplit {
 
     }
 
-
 }

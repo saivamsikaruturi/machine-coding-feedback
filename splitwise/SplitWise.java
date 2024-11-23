@@ -9,7 +9,6 @@ public class SplitWise {
     GroupController groupController;
 
     BalanceSheetController balanceSheetController;
-
     SplitWise(){
         userController = new UserController();
         groupController = new GroupController();

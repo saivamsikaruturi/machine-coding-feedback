@@ -6,3 +6,4 @@ public enum ExpenseSplitType {
     UNEQUAL,
     PERCENTAGE
 }
+
