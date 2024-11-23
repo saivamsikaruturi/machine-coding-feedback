@@ -23,4 +23,3 @@ public class CheckBalanceState extends ATMState {
         System.out.println("Please collect your card");
     }
 }
-

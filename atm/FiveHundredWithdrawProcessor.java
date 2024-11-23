@@ -24,4 +24,3 @@ public class FiveHundredWithdrawProcessor extends CashWithdrawProcessor {
         }
     }
 }
-

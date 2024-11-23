@@ -8,4 +8,3 @@ public class UserBankAccount {
         balance = balance - amount;
     }
 }
-

@@ -14,4 +14,3 @@ public class User {
         this.card = card;
     }
 }
-

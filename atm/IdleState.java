@@ -8,4 +8,3 @@ public class IdleState extends ATMState {
         atm.setCurrentATMState(new HasCardState());
     }
 }
-
