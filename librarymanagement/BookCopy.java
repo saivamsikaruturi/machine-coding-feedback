@@ -46,3 +46,4 @@ class BookCopy {
         System.out.println(copyId + " " + rack.getRackNumber());
     }
 }
+
