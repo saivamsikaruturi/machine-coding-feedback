@@ -7,3 +7,4 @@ public enum Status {
     BOOKED,
     OPEN
 }
+

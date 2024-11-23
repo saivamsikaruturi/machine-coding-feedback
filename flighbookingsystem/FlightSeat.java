@@ -10,3 +10,4 @@ public class FlightSeat extends Seat{
         this.status = status;
     }
 }
+

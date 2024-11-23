@@ -10,3 +10,4 @@ public class BookingDetail {
     Date date;
     String pnr;
 }
+

@@ -75,5 +75,4 @@ public class Main {
         System.out.println("Booking Flight...");
       //  bookingSystem.bookingFlight(flight1, user);
     }
-
 }
