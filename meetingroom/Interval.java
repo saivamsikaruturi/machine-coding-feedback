@@ -38,5 +38,4 @@ public class Interval {
         this.end = end;
     }
 
-
 }

@@ -92,5 +92,4 @@ public class MeetingRoom {
         System.out.println("Meeting room " + meetingRoomId + " booked successfully from " + start + " to " + end + " on " + date);
     }
 
-
 }
