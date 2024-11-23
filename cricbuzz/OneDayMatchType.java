@@ -10,5 +10,4 @@ public class OneDayMatchType implements MatchType {
     public int maxOverCountBowlers() {
         return 10;
     }
-
 }

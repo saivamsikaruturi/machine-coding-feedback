@@ -6,3 +6,4 @@ public enum WicketType {
     BOLD,
     CATCH;
 }
+

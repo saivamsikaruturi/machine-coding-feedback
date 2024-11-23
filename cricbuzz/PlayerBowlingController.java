@@ -35,5 +35,4 @@ public class PlayerBowlingController {
     public Player getCurrentBowler(){
         return currentBowler;
     }
-
 }

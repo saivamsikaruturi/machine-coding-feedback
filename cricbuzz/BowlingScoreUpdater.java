@@ -30,5 +30,4 @@ public class BowlingScoreUpdater implements ScoreUpdaterObserver {
             Balls.bowledBy.bowlingScoreCard.wideBalls++;
         }
     }
-
 }

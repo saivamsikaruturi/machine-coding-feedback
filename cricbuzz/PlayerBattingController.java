@@ -43,5 +43,4 @@ public class PlayerBattingController {
         nonStriker = Player;
     }
 
-
 }

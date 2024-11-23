@@ -20,7 +20,6 @@ public class Main {
 
     }
 
-
     private Team addTeam(String name) {
 
         Queue<Player> Player = new LinkedList<>();

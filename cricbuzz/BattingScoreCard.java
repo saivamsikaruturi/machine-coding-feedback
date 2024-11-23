@@ -7,6 +7,5 @@ public class BattingScoreCard {
     int totalSixes;
     int strikeRate;
     public Wicket wicketDetails;
-
 }
 

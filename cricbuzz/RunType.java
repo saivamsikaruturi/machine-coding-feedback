@@ -9,3 +9,4 @@ public enum RunType {
     SIX,
     WIDE_RUN
 }
+

@@ -52,5 +52,4 @@ public class Innings {
     public int getTotalRuns(){
         return battingTeam.getTotalRuns();
     }
-
 }

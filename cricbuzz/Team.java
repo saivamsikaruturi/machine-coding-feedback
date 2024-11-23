@@ -78,5 +78,4 @@ public class Team {
         }
         return totalRun;
     }
-
 }
