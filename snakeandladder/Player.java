@@ -1,3 +1,5 @@
+package snakeandladder;
+
 public class Player {
     private final String name;
     private int position;

@@ -1,4 +1,6 @@
-import java.util.LinkedList;
+package snakeandladder;
+
+
 import java.util.Queue;
 
 public class Game {
@@ -36,5 +38,7 @@ public class Game {
                 players.add(currentPlayer);
             }
         }
+        StringBuilder sb = new StringBuilder();
+        sb.insert(0,"abc");
     }
 }
