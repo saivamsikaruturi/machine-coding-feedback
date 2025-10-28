@@ -19,13 +19,13 @@ class Movie {
     public Movie() {
     }
 
-    public Movie(int duration, String genre, Integer movieId, String movieName, Date releaseDate, String title) {
-        this.duration = duration;
-        this.genre = genre;
-        this.movieId = movieId;
-        this.movieName = movieName;
-        this.releaseDate = releaseDate;
-        this.title = title;
+    public Movie(MovieBuilder builder) {
+        this.duration = builder.duration;
+        this.genre = builder.genre;
+        this.movieId = builder.movieId;
+        this.movieName = builder.movieName;
+        this.releaseDate = builder.releaseDate;
+        this.title = builder.title;
     }
 
     public int getDuration() {
@@ -74,5 +74,34 @@ class Movie {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public static class MovieBuilder {
+
+        private Integer movieId;
+        private String movieName;
+        private String title;
+        private String genre;
+        private int duration; // Duration in minutes // optional
+        private Date releaseDate;
+
+        public MovieBuilder(String movieName, Integer movieId, String genre, Date releaseDate, String title) {
+            this.movieName = movieName;
+            this.movieId = movieId;
+            this.genre = genre;
+            this.releaseDate = releaseDate;
+            this.title = title;
+        }
+
+        public MovieBuilder setDuration(int duration) {
+            this.duration = duration;
+            return this;
+        }
+
+        public Movie build(){
+            return new Movie(this);
+        }
+
+
     }
 }

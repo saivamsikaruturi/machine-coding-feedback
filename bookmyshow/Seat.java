@@ -1,14 +1,37 @@
 package bookmyshow;
 
 
-
-class Seat {
+public class Seat {
     private Integer seatId;
     private String seatNumber;
     private SeatType seatType;
     private SeatStatus seatStatus;
+    private boolean isLocked = false;
 
-    // Constructors, getters, and setters
+    public synchronized boolean lockSeat() {
+        if (seatStatus == SeatStatus.AVAILABLE && !isLocked) {
+            isLocked = true;
+            return true;
+        }
+        return false;
+    }
+
+    public synchronized void unlockSeat() {
+        isLocked = false;
+    }
+
+    public synchronized boolean bookSeat() {
+        if (isLocked) {
+            seatStatus = SeatStatus.BOOKED;
+            isLocked = false;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
 
     public Integer getSeatId() {
         return seatId;
@@ -24,6 +47,10 @@ class Seat {
 
     public SeatType getSeatType() {
         return seatType;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
     }
 
     public void setSeatId(Integer seatId) {

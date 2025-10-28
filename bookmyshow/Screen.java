@@ -6,7 +6,7 @@ import java.util.List;
 class Screen {
     private Integer screenId;
     private String name;
-    private Theater theater;
+
     private List<Seat> seats;
     private List<Show> shows;
 
@@ -31,9 +31,7 @@ class Screen {
         return shows;
     }
 
-    public Theater getTheater() {
-        return theater;
-    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -51,9 +49,7 @@ class Screen {
         this.shows = shows;
     }
 
-    public void setTheater(Theater theater) {
-        this.theater = theater;
-    }
+
 }
 
 

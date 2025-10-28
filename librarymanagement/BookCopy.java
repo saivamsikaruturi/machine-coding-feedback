@@ -1,5 +1,6 @@
 package librarymanagement;
-class BookCopy {
+
+public class BookCopy {
     private String copyId;
     private Book book;
     private Rack rack;

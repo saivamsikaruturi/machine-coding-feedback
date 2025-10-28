@@ -1,199 +1,120 @@
 package bookmyshow;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BookMyShow {
+    private final Map<City, List<Theater>> cityVsTheater;
+    private final List<Theater> allTheaters;
+    private final BookingController bookingController;
 
-    MovieController movieController;
-    TheaterController TheaterController;
-
-    BookMyShow() {
-        movieController = new MovieController();
-        TheaterController = new TheaterController();
+    public BookMyShow() {
+        this.cityVsTheater = new HashMap<>();
+        this.allTheaters = new ArrayList<>();
+        this.bookingController = new BookingController();
     }
 
+    public void addTheater(Theater theater, City city) {
+        allTheaters.add(theater);
+        cityVsTheater.computeIfAbsent(city, k -> new ArrayList<>()).add(theater);
+    }
 
-    public static void main(String args[]) {
+    public String bookTicket(Movie movie, Show show, List<Seat> seats, UserDetails user, Date bookingDate, Payment payment) {
+        return bookingController.bookTicket(movie, show, seats, user, bookingDate, payment);
+    }
 
+    public Booking getBookingDetails(UserDetails user, Integer bookingId) {
+        return bookingController.getTicketDetails(user, bookingId);
+    }
+
+    public void showAvailableTheaters(City city) {
+        List<Theater> theaters = cityVsTheater.getOrDefault(city, new ArrayList<>());
+        if (theaters.isEmpty()) {
+            System.out.println("No theaters available in " + city);
+        } else {
+            theaters.forEach(theater -> System.out.println(theater.getName()));
+        }
+    }
+
+    public static void main(String[] args) {
         BookMyShow bookMyShow = new BookMyShow();
 
-      bookMyShow.initialize();
-
-        //user1
-        bookMyShow.createBooking(City.Bangalore, "BAAHUBALI");
-        //user2
-        bookMyShow.createBooking(City.Bangalore, "BAAHUBALI");
-
-    }
-
-    private void createBooking(City userCity, String movieName) {
-
-
-        //1. search movie by my location
-        List<Movie> movies = movieController.getMoviesByCity(userCity);
-
-        //2. select the movie which you want to see. i want to see Baahubali
-        Movie interestedMovie = null;
-        for (Movie movie : movies) {
-
-            if ((movie.getMovieName()).equals(movieName)) {
-                interestedMovie = movie;
-            }
-        }
-
-        //3. get all show of this movie in Bangalore location
-        Map<Theater, List<Show>> showsTheaterWise = TheaterController.getAllShow(interestedMovie, userCity);
-
-        //4. select the particular show user is interested in
-        Map.Entry<Theater,List<Show>> entry = showsTheaterWise.entrySet().iterator().next();
-        List<Show> runningShows = entry.getValue();
-        Show interestedShow = runningShows.get(0);
-
-        //5. select the seat
-        int seatNumber = 30;
-        List<Integer> bookedSeats = interestedShow.getBookedSeats() == null ? new ArrayList<>() : interestedShow.getBookedSeats();
-        if(!bookedSeats.contains(seatNumber)){
-            bookedSeats.add(seatNumber);
-            //startPayment
-            Booking booking = new Booking();
-            List<Seat> myBookedSeats = new ArrayList<>();
-            for(Seat screenSeat : interestedShow.getScreen().getSeats()) {
-                if(screenSeat.getSeatId() == seatNumber) {
-                    myBookedSeats.add(screenSeat);
-                }
-            }
-            booking.setBookedSeats(myBookedSeats);
-            booking.setShow(interestedShow);
-        } else {
-            //throw exception
-            System.out.println("seat already booked, try again");
-            return;
-        }
-
-        System.out.println("BOOKING SUCCESSFUL");
-    }
-
-    private void initialize() {
-
-        //create movies
-        createMovies();
-
-        //create theater with screens, seats and shows
-        createTheater();
-    }
-
-    //creating 2 Theater
-    private void createTheater() {
-
-        Movie avengerMovie = movieController.getMovieByName("AVENGERS");
-        Movie baahubali = movieController.getMovieByName("BAAHUBALI");
-
-        Theater inoxTheater = new Theater();
-        inoxTheater.setTheaterId(1);
-        inoxTheater.setScreens(createScreen());
-        inoxTheater.setCity(City.Bangalore);
-        List<Show> inoxShows = new ArrayList<>();
-        Show inoxMorningShow = createShows(1, inoxTheater.getScreens().get(0), avengerMovie, 8);
-        Show inoxEveningShow = createShows(2, inoxTheater.getScreens().get(0), baahubali, 16);
-        inoxShows.add(inoxMorningShow);
-        inoxShows.add(inoxEveningShow);
-        inoxTheater.setShows(inoxShows);
-
-
-        Theater pvrTheater = new Theater();
-        pvrTheater.setTheaterId(2);
-        pvrTheater.setScreens(createScreen());
-        pvrTheater.setCity(City.Delhi);
-        List<Show> pvrShows = new ArrayList<>();
-        Show pvrMorningShow = createShows(3, pvrTheater.getScreens().get(0), avengerMovie, 13);
-        Show pvrEveningShow = createShows(4, pvrTheater.getScreens().get(0), baahubali, 20);
-        pvrShows.add(pvrMorningShow);
-        pvrShows.add(pvrEveningShow);
-        pvrTheater.setShows(pvrShows);
-
-        TheaterController.addTheater(inoxTheater, City.Bangalore);
-        TheaterController.addTheater(pvrTheater, City.Delhi);
-
-    }
-
-    private List<Screen> createScreen() {
-
-        List<Screen> screens = new ArrayList<>();
+        // Creating Screens
         Screen screen1 = new Screen();
-        screen1.setScreenId(1);
-        screen1.setSeats(createSeats());
-        screens.add(screen1);
+        Screen screen2 = new Screen();
 
-        return screens;
-    }
+        // Creating Movies
+        Movie movie1 = new Movie.MovieBuilder("RRR", 1,"Patriortic",new Date(),"Inception").setDuration(90).build();
+        Movie movie2 = new Movie.MovieBuilder("RRR", 1,"Patriortic",new Date(),"Inception").setDuration(120).build();
 
-    private Show createShows(int showId, Screen screen, Movie movie, int showStartTime) {
+        // Creating Seats
+        Seat seatA1 = new Seat();
+        seatA1.setSeatId(1);
+        seatA1.setSeatNumber("A1");
+        seatA1.setSeatType(SeatType.REGULAR);
+        seatA1.setSeatStatus(SeatStatus.AVAILABLE);
 
-        Show show = new Show();
-        show.setShowId(showId);
-        show.setScreen(screen);
-        show.setMovie(movie);
-        show.setShowTime(showStartTime); //24 hrs time ex: 14 means 2pm and 8 means 8AM
-        return show;
-    }
+        Seat seatA2 = new Seat();
+        seatA2.setSeatId(2);
+        seatA2.setSeatNumber("A2");
+        seatA2.setSeatType(SeatType.REGULAR);
+        seatA2.setSeatStatus(SeatStatus.AVAILABLE);
 
-    //creating 100 seats
-    private List<Seat> createSeats() {
+        // Creating Shows with seats
+        List<Integer> show1Seats = Collections.synchronizedList(new ArrayList<>(List.of(1, 2)));
+        Show show1 = new Show(show1Seats, movie1, screen1, 1, 1900);
 
-        //creating 100 seats for testing purpose, this can be generalised
-        List<Seat> seats = new ArrayList<>();
+        List<Integer> show2Seats = Collections.synchronizedList(new ArrayList<>(List.of(1, 2)));
+        Show show2 = new Show(show2Seats, movie2, screen2, 2, 2100);
 
-        //1 to 40 : SILVER
-        for (int i = 0; i < 40; i++) {
-            Seat seat = new Seat();
-            seat.setSeatId(i);
-            seat.setSeatType(SeatType.REGULAR);
-            seats.add(seat);
-        }
+        // Creating Theater
+        List<Screen> screens = Arrays.asList(screen1, screen2);
+        List<Show> shows = Arrays.asList(show1, show2);
+        Theater theater = new Theater(City.Delhi, "PVR Cinemas", screens, shows, 1);
 
-        //41 to 70 : SILVER
-        for (int i = 40; i < 70; i++) {
-            Seat seat = new Seat();
-            seat.setSeatId(i);
-            seat.setSeatType(SeatType.REGULAR);
-            seats.add(seat);
-        }
+        // Adding Theater to BookMyShow
+        bookMyShow.addTheater(theater, City.Delhi);
 
-        //1 to 40 : SILVER
-        for (int i = 70; i < 100; i++) {
-            Seat seat = new Seat();
-            seat.setSeatId(i);
-            seat.setSeatType(SeatType.REGULAR);
-            seats.add(seat);
-        }
+        // Display available theaters in the city
+        bookMyShow.showAvailableTheaters(City.Delhi);
 
-        return seats;
-    }
+        // Create Users
+        UserDetails user1 = new UserDetails();
+        user1.setUserId("U1001");
+        user1.setName("Alice");
+        user1.setEmail("alice@example.com");
 
-    private void createMovies() {
+        UserDetails user2 = new UserDetails();
+        user2.setUserId("U1002");
+        user2.setName("Bob");
+        user2.setEmail("bob@example.com");
 
-        //create Movies1
-        Movie avengers = new Movie();
-        avengers.setMovieId(1);
-        avengers.setMovieName("AVENGERS");
-        avengers.setDuration(128);
+        // Create Payments
+        Payment payment1 = new Payment();
+        payment1.setPaymentId("P1001");
+        payment1.setAmount(250.0);
+        payment1.setType(PaymentType.CREDIT_CARD);
+        payment1.setStatus(PaymentStatus.SUCCESS);
+        payment1.setPaymentDate(new Date());
 
-        //create Movies2
-        Movie baahubali = new Movie();
-        baahubali.setMovieId(2);
-        baahubali.setMovieName("BAAHUBALI");
-        baahubali.setDuration(180);
+        Payment payment2 = new Payment();
+        payment2.setPaymentId("P1002");
+        payment2.setAmount(250.0);
+        payment2.setType(PaymentType.DEBIT_CARD);
+        payment2.setStatus(PaymentStatus.SUCCESS);
+        payment2.setPaymentDate(new Date());
 
+        // Simulate Concurrent Booking
+        Thread user1Thread = new Thread(() -> {
+            String result = bookMyShow.bookTicket(movie1, show1, List.of(seatA1), user1, new Date(), payment1);
+            System.out.println("User 1: " + result);
+        });
 
-        //add movies against the cities
-        movieController.addMovie(avengers, City.Bangalore);
-        movieController.addMovie(avengers, City.Delhi);
-        movieController.addMovie(baahubali, City.Bangalore);
-        movieController.addMovie(baahubali, City.Delhi);
+        Thread user2Thread = new Thread(() -> {
+            String result = bookMyShow.bookTicket(movie1, show1, List.of(seatA1), user2, new Date(), payment2);
+            System.out.println("User 2: " + result);
+        });
+
+        user1Thread.start();
+        user2Thread.start();
     }
 }
-
-
